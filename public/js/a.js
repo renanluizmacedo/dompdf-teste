@@ -4,7 +4,7 @@ function gerarGrafico(dadosAlunoJSON) {
     });
     google.charts.setOnLoadCallback(drawChart);
 
-    const aluno = JSON.parse(dadosAlunoJSON);
+    var aluno = JSON.parse(dadosAlunoJSON);
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
@@ -41,13 +41,13 @@ function gerarGrafico(dadosAlunoJSON) {
         var generateData = function () {
             var result = [];
             var data = {
-                Nome: dados.nome,
-                Curso: dados.curso.nome,
+                nome: dados.nome,
+                curso: dados.curso.nome,
+                turma: dados.turma,
+                napne: dados.napne,
+                ano_ingresso: dados.ano_ingresso,
             };
-            for (var i = 0; i < 1; i += 1) {
-                data.id = (i + 1).toString();
-                result.push(Object.assign({}, data));
-            }
+            result.push(Object.assign({}, data));
             return result;
         };
 
@@ -58,24 +58,30 @@ function gerarGrafico(dadosAlunoJSON) {
                     id: keys[i],
                     name: keys[i],
                     prompt: keys[i],
-                    width: 100,
+                    width: 65,
                     align: "center",
                     padding: 0,
                 });
             }
+
             return result;
         }
 
-        var headers = createHeaders(["Nome", "Curso"]);
+        var headers = createHeaders([
+            "nome",
+            "curso",
+            "turma",
+            "napne",
+            "ano_ingresso"
+        ]);
 
         var doc = new jsPDF({
             putOnlyUsedFonts: true,
             orientation: "landscape",
         });
-
         doc.addImage(img, "JPEG", 15, 40, 180, 160);
 
-        doc.table(1, 1, generateData(), headers);
+        doc.table(1, 1, generateData(), headers, { autoSize: true });
 
         doc.save("table.pdf");
     }
