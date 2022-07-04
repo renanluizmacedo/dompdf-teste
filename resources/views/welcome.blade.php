@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <title>Document</title>
@@ -41,11 +39,10 @@
                         <td>{{ $item->ano_ingresso }}</td>
                         <td>{{ $item->napne }}</td>
                         <td>{{ $item->curso->nome }}</td>
+
                         <td>
-                            <button type="button" onclick="gerarGrafico('{{$item}}')">gerarGrafico</button>
-
+                            <a href="{{route('PDF',$item)}}" class="btn btn-primary">TESTE</a>
                         </td>
-
                     </tr>
                     @endforeach
                 </tbody>
@@ -54,40 +51,10 @@
 
         </div>
     </div>
-    <div class="chart_div" id="chart_div">
-    </div>
 
 
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('js/gerarGrafico.js') }}"></script>
 
-
-    <script type="text/javascript">
-        function createPdf() {
-
-            var doc = new jsPDF();
-
-            source = $('#content')[0];
-
-            specialElementHandlers = {
-                '#editor': function(element, renderer) {
-                    return true
-                }
-            };
-
-            doc.fromHTML(
-                source,
-                15,
-                15, {
-                    'width': 170,
-                    'elementHandlers': specialElementHandlers
-                }
-            );
-
-            
-            doc.save('sample-file.pdf')
-        }
-    </script>
 </body>
 
 </html>

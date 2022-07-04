@@ -13,13 +13,12 @@ class AlunoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {      
-
+    {
         $data = Aluno::with(['curso'])->orderBy('nome')->get();
         // return json_encode($data);
-        return view('welcome', compact(['data']));   
-        
-        }
+
+        return view('welcome', compact(['data']));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -50,7 +49,7 @@ class AlunoController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -84,6 +83,5 @@ class AlunoController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }

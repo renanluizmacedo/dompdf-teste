@@ -18,4 +18,10 @@ class Disciplina extends Model {
     public function area() {
         return $this->belongsTo('\App\Models\Area');
     }
+
+    public function conceito() {
+        return $this->hasMany('\App\Models\Conceito');
+    }
+
+
 }

@@ -22,3 +22,5 @@ Route::get('/', function () {
 Route::get('/', [AlunoController::class, 'index']);
 
 
+Route::get('/GERARPDF/{aluno}', [GerarPDF::class, 'gerarPDF'])->name('PDF');
+
